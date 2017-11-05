@@ -75,9 +75,10 @@ class Ship {
 }
 
 class Game {
-  constructor(pieces, ships) {
+  constructor(pieces, ships, locs=[]) {
     this.pieces = pieces;
     this.ships = ships;
+    this.locs = locs;
   }
 }
 
@@ -93,6 +94,20 @@ function encode(game) {
     }
   }
   
+  return encode64(binary);
+}
+
+function encodeMoves(game) {
+  var binary = "";
+  for (var i = 0; i < 8; i++) {
+    if (i < game.locs.length) {
+      var numString = game.locs[i].toString(2);
+    } else {
+      var numString = "111111";
+    }
+    binary += ("000000" + numString).substring(numString.length);
+  }
+
   return encode64(binary);
 }
 
@@ -117,4 +132,22 @@ function decode(string) {
     }
   }
   return new Game(pieces, ships);
+}
+
+// Decodes a base64 string into moves
+function decodeMoves(string) {
+  var binary = decode64(string);
+  binary = binary.substring(binary.length - (6 * 8));
+
+  var locs = [];
+  if (binary.length == 6 * 8) {
+    for (var i = 0; i < 8; i++) {
+      var slice = binary.substr(i*6, 6);
+      var num = parseInt(slice, 2);
+      if (num != 63) {
+        locs.push(num);
+      }
+    }
+  }
+  return locs;
 }

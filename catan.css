@@ -186,6 +186,23 @@ div.row:not(:first-child) {
 	margin-top: -43px;
 }
 
-#board {
-	//transform: rotate(-90deg);
+#sidebar {
+	font-family: 'Helvetica', sans-serif;
+
+	position: fixed;
+	top: 0;
+
+	padding: 5px;
+	max-width: 200px;
+}
+
+#sidebar h2,
+#sidebar h3,
+#sidebar h4 {
+	padding: 0px;
+	margin: 0px;
+}
+
+#sidebar h3 {
+	text-decoration: underline;
 }

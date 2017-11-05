@@ -3,6 +3,8 @@ var allProbs = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12];
 
 var allShips = ["31", "31", "31", "31", "wheat", "ore", "lumber", "brick", "sheep"];
 
+var moves = ['Red', 'Blue', 'Yellow', 'White', 'White', 'Yellow', 'Blue', 'Red'];
+
 function newGame() {
   var board = shuffle(allPieces);
   var probs = shuffle(allProbs);
@@ -27,6 +29,7 @@ function newGame() {
 
 function displayGame(game) {
   var str = "<div id='board'><div id='display'><img class='background' src='./assets/images/background.png'>";
+
   // Add in all pieces
   for (var i = 0; i < game.pieces.length; i++) {
     var piece = game.pieces[i];
@@ -42,21 +45,32 @@ function displayGame(game) {
       str += "</div>";
     }
   }
+
   // Add in all of the ships
   for (var i = 0; i < game.ships.length; i++) {
     var ship = game.ships[i];
     str += "<div class='ship-" + i + "'><img src='./assets/images/ships/" + ship.type + ".png'></div>";
   }
   str += "</div><div id='spots'>";
+
   // Add in all clickable locations
   var temp = '';
   for (var i = 0; i < 54; i++) {
     if ([0, 3, 7, 11, 16, 21, 27, 33, 38, 43, 47, 51].includes(i)) {
       temp += "</div><div class='chunk'>";
     }
-    temp += "<span data-num='" + i + "' class='open'></span>";
+    if (game.locs.includes(i)) {
+      temp += "<span data-num='" + i + "' class='" + moves[game.locs.indexOf(i)].toLowerCase() + "'></span>";
+    } else {
+      temp += "<span data-num='" + i + "' class='open'></span>";
+    }
   }
+
   temp = temp.substring(6) + '</div>';
   str += temp + "</div></div>";
+
+  // Add in the helper side view
+  str += "<div id='sidebar'><h3>Share</h3><a id='gameid'>Link to Board</a><br><a id='moveid'>Link to Board w/ Moves</a><p></p><h4 id='placement'>Red is placing</h4><a href='?'>Generate New Board</a></div>";
+
   document.body.innerHTML = str;
 }
