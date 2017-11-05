@@ -213,3 +213,7 @@ div.row:not(:first-child) {
 #sidebar h3 {
 	text-decoration: underline;
 }
+
+#sidebar a {
+	text-decoration: none;
+}

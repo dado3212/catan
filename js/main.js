@@ -71,7 +71,7 @@ function displayGame(game) {
   str += temp + "</div></div>";
 
   // Add in the helper side view
-  str += "<div id='sidebar'><h3>Share</h3><a id='gameid'>Link to Board</a><br><a id='moveid'>Link to Board w/ Moves</a><p></p><h4 id='placement'>Red is placing</h4><a href='?'>Generate New Board</a></div>";
+  str += "<div id='sidebar'><h3>Share</h3><a id='gameid'>Link to Board</a><br><a id='moveid'>Link to Board w/ Moves</a><p></p><h4 id='placement'>Red is placing</h4><a id='undo' href='#'>Undo</a><br><br><a href='?'>Generate New Board</a></div>";
 
   document.body.innerHTML = str;
 }

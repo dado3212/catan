@@ -68,7 +68,34 @@
         var moveColors = ['Red', 'Blue', 'Yellow', 'White', 'White', 'Yellow', 'Blue', 'Red', 'No one'];
         var index = game.locs.length;
 
+        // Set up clickable spots
         var spots = document.querySelectorAll('.chunk span');
+
+        // Undo button
+        document.querySelector('#undo').addEventListener('click', function(event) {
+          if (game.locs.length > 0) {
+            // Pop off a move
+            var removed = game.locs.pop();
+
+            // Update the move URL
+            document.querySelector('#moveid').href = '?game=' + gameCode + '&moves=' + encodeMoves(game);
+
+            // Update the index
+            index -= 1;
+            document.querySelector('#placement').innerHTML = moveColors[index] + ' is placing.';
+
+            // Update the spot
+            var spot = document.querySelector('.chunk span[data-num="' + removed + '"]');
+            spot.className = '';
+
+            // Make sure open spots are marked as open
+            for (var i = 0; i < spots.length; i++) {
+              if (spots[i].className == '') {
+                spots[i].classList.add('open');
+              }
+            }
+          }
+        });
 
         for (var i = 0; i < spots.length; i++) {
           spots[i].addEventListener('click', function(event) {
