@@ -1,9 +1,14 @@
 body {
-	padding-top: 98px;
-    background: url("assets/images/background.png");
-    background-repeat: no-repeat;
-    background-size: 1004px 856px;
-    background-position: calc(50% + 7px) 30px;
+	padding-top: 120px;
+}
+
+.background {
+	height: 1003px;
+  position: absolute;
+  top: -69px;
+  left: 50%;
+  transform: translate(-50%, 0%) rotate(30deg);
+  z-index: -1;
 }
 
 .tile {
@@ -12,6 +17,8 @@ body {
 	height: 172px;
 	display: inline-block;
 	vertical-align: top;
+
+	background-size: cover;
 }
 
 .tile[prob]:after {

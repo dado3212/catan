@@ -18,7 +18,7 @@ function newGame() {
 }
 
 function displayGame(game) {
-  var str = "<div id='board'>";
+  var str = "<div id='board'><img class='background' src='assets/images/background.png'>";
   for (var i = 0; i < game.pieces.length; i++) {
     var piece = game.pieces[i];
     if (i == 0 || i == 3 || i == 7 || i == 12 || i == 16) {
