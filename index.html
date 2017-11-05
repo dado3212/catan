@@ -68,6 +68,8 @@
         var moveColors = ['Red', 'Blue', 'Yellow', 'White', 'White', 'Yellow', 'Blue', 'Red', 'No one'];
         var index = game.locs.length;
 
+        document.querySelector('#placement').innerHTML = moveColors[index] + ' is placing.';
+
         // Set up clickable spots
         var spots = document.querySelectorAll('.chunk span');
 
