@@ -33,7 +33,7 @@ body {
 .chunk:nth-of-type(12) { width: 321px; }
 
 .chunk:nth-of-type(2n) { padding-top: 16px; }
-.chunk:nth-of-type(2n + 1) { padding-top: 71px; }
+.chunk:nth-of-type(2n + 1) { padding-top: 72px; }
 
 .chunk span {
 	width: 20px;
@@ -42,6 +42,72 @@ body {
 	border-radius: 10px;
 	text-align: center;
 	opacity: 0.4;
+}
+
+/* Adding in Ships */
+div[class^="ship-"] {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+
+div[class^="ship-"] img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.ship-0 {
+  top: -58px;
+  left: calc(50% - 243px);
+  transform: rotate(180deg);
+}
+
+.ship-1 {
+  top: -58px;
+  left: calc(50% + 23px);
+  transform: rotate(180deg);
+}
+
+.ship-2 {
+  top: 183px;
+  left: calc(50% - 382px);
+  transform: rotate(113deg);
+}
+
+.ship-3 {
+  top: 71px;
+  left: calc(50% + 261px);
+  transform: rotate(220deg);
+}
+
+.ship-4 {
+  top: 459px;
+  left: calc(50% - 389px);
+  transform: rotate(64deg);
+}
+
+.ship-5 {
+  top: 320px;
+  left: calc(50% + 396px);
+  transform: rotate(295deg);
+}
+
+.ship-6 {
+  top: 689px;
+  left: calc(50% - 249px);
+  transform: rotate(40deg);
+}
+
+.ship-7 {
+  top: 689px;
+  left: calc(50% + 34px);
+  transform: rotate(0deg);
+}
+
+.ship-8 {
+	top: 553px;
+  left: calc(50% + 268px);
+  transform: rotate(-50deg);
 }
 
 .background {

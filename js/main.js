@@ -1,9 +1,12 @@
 var allPieces = ["desert","brick","brick","brick","lumber","lumber","lumber","lumber","ore","ore","ore","sheep","sheep","sheep","sheep","wheat","wheat","wheat","wheat"];
 var allProbs = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12];
 
+var allShips = ["31", "31", "31", "31", "wheat", "ore", "lumber", "brick", "sheep"];
+
 function newGame() {
   var board = shuffle(allPieces);
   var probs = shuffle(allProbs);
+  var ships = shuffle(allShips);
 
   var pieces = [];
   for (var i = 0; i < board.length; i++) {
@@ -14,7 +17,12 @@ function newGame() {
     }
   }
 
-  return new Game(pieces);
+  var theseShips = [];
+  for (var i = 0; i < ships.length; i++) {
+    theseShips.push(new Tile(ships[i]));
+  }
+
+  return new Game(pieces, theseShips);
 }
 
 function displayGame(game) {
@@ -22,7 +30,7 @@ function displayGame(game) {
   // Add in all pieces
   for (var i = 0; i < game.pieces.length; i++) {
     var piece = game.pieces[i];
-    if (i == 0 || i == 3 || i == 7 || i == 12 || i == 16) {
+    if ([0, 3, 7, 12, 16].includes(i)) {
       str += "<div class='row'>";
     }
     if (piece.type != "desert") {
@@ -33,6 +41,11 @@ function displayGame(game) {
     if (i == 2 || i == 6 || i == 11 || i == 15 || i == 18) {
       str += "</div>";
     }
+  }
+  // Add in all of the ships
+  for (var i = 0; i < game.ships.length; i++) {
+    var ship = game.ships[i];
+    str += "<div class='ship-" + i + "'><img src='assets/images/ships/" + ship.type + ".png'></div>";
   }
   str += "</div><div id='spots'>";
   // Add in all clickable locations

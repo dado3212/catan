@@ -62,9 +62,16 @@ class Tile {
   }
 }
 
+class Ship {
+  constructor(type) {
+    this.type = type;
+  }
+}
+
 class Game {
-  constructor(pieces) {
+  constructor(pieces, ships) {
     this.pieces = pieces;
+    this.ships = ships;
   }
 }
 
