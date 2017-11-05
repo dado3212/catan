@@ -62,6 +62,7 @@ body {
 
 .chunk span.open {
 	background-color: white;
+	cursor: pointer;
 	animation: open-animation 3s infinite;
 }
 
