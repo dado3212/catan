@@ -68,10 +68,15 @@
         var moveColors = ['Red', 'Blue', 'Yellow', 'White', 'White', 'Yellow', 'Blue', 'Red', 'No one'];
         var index = game.locs.length;
 
-        document.querySelector('#placement').innerHTML = moveColors[index] + ' is placing.';
-
         // Set up clickable spots
         var spots = document.querySelectorAll('.chunk span');
+
+        document.querySelector('#placement').innerHTML = moveColors[index] + ' is placing.';
+        if (index == moveColors.length - 1) {
+          for (var i = 0; i < spots.length; i++) {
+            spots[i].classList.remove('open');
+          }
+        }
 
         // Undo button
         document.querySelector('#undo').addEventListener('click', function(event) {
