@@ -66,7 +66,7 @@
         document.querySelector('#moveid').href = '?game=' + gameCode + '&moves=' + encodeMoves(game);
 
         var moveColors = ['Red', 'Blue', 'Yellow', 'White', 'White', 'Yellow', 'Blue', 'Red', 'No one'];
-        var index = 0;
+        var index = game.locs.length;
 
         var spots = document.querySelectorAll('.chunk span');
 
