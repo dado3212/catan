@@ -3,11 +3,11 @@ body {
 }
 
 .background {
-	height: 1003px;
+	width: 994px;
   position: absolute;
-  top: -69px;
+  top: -5px;
   left: 50%;
-  transform: translate(-50%, 0%) rotate(30deg);
+  transform: translate(-50%, 0%);
   z-index: -1;
 }
 
