@@ -26,7 +26,7 @@ function newGame() {
 }
 
 function displayGame(game) {
-  var str = "<div id='board'><div id='display'><img class='background' src='assets/images/background.png'>";
+  var str = "<div id='board'><div id='display'><img class='background' src='./assets/images/background.png'>";
   // Add in all pieces
   for (var i = 0; i < game.pieces.length; i++) {
     var piece = game.pieces[i];
@@ -36,7 +36,7 @@ function displayGame(game) {
     if (piece.type != "desert") {
       str += "<span class='tile' prob='" + piece.number + "' dots='" + Array((6 - Math.abs(piece.number - 7))+1).join(".") + "' style='background-image: url(\"assets/images/" + piece.type + ".png\"); color: " + ((piece.number == 6 || piece.number == 8) ? "red" : "black") + "'></span>";
     } else {
-      str += "<span class='tile' style='background-image: url(\"assets/images/desert.png\")'></span>";
+      str += "<span class='tile' style='background-image: url(\"./assets/images/desert.png\")'></span>";
     }
     if (i == 2 || i == 6 || i == 11 || i == 15 || i == 18) {
       str += "</div>";
@@ -45,7 +45,7 @@ function displayGame(game) {
   // Add in all of the ships
   for (var i = 0; i < game.ships.length; i++) {
     var ship = game.ships[i];
-    str += "<div class='ship-" + i + "'><img src='assets/images/ships/" + ship.type + ".png'></div>";
+    str += "<div class='ship-" + i + "'><img src='./assets/images/ships/" + ship.type + ".png'></div>";
   }
   str += "</div><div id='spots'>";
   // Add in all clickable locations
