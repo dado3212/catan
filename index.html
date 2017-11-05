@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Catan Generator</title>
+    <link rel="stylesheet" type="text/css" href="catan.css">
+    <script src="js/helper.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      window.onload = function() {
+        if (window.location.search.startsWith("?game=") && window.location.search.slice(1).indexOf("&") == -1) {
+          var game = decode(window.location.search.slice(6));
+        } else {
+          var game = newGame();
+        }
+        console.log(encode(game));
+        displayGame(game);
+      };
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

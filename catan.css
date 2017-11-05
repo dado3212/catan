@@ -1,0 +1,49 @@
+body {
+	padding-top: 98px;
+    background: url("assets/images/background.png");
+    background-repeat: no-repeat;
+    background-size: 1004px 856px;
+    background-position: calc(50% + 7px) 30px;
+}
+
+.tile {
+	width: 152px;
+	margin-right: -2px;
+	height: 172px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.tile[prob]:after {
+	display: block;
+	width: 50px;
+	height: 35px;
+	margin: 60px 0 0 50px;
+
+	content: attr(prob) "\A" attr(dots);
+
+	line-height: 10px;
+	padding-top: 13px;
+
+	background-color: #E9D49D;
+	border: 2px solid #AD9D75;
+	border-radius: 27px;
+	
+	font-size: 25px;
+	font-weight: bold;
+
+	white-space: pre;
+}
+
+div.row {
+	display: block;
+	text-align: center;
+}
+
+div.row:not(:first-child) {
+	margin-top: -43px;
+}
+
+#board {
+	//transform: rotate(-90deg);
+}
