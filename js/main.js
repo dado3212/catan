@@ -18,7 +18,8 @@ function newGame() {
 }
 
 function displayGame(game) {
-  var str = "<div id='board'><img class='background' src='assets/images/background.png'>";
+  var str = "<div id='board'><div id='display'><img class='background' src='assets/images/background.png'>";
+  // Add in all pieces
   for (var i = 0; i < game.pieces.length; i++) {
     var piece = game.pieces[i];
     if (i == 0 || i == 3 || i == 7 || i == 12 || i == 16) {
@@ -33,6 +34,16 @@ function displayGame(game) {
       str += "</div>";
     }
   }
-  str += "</div>";
+  str += "</div><div id='spots'>";
+  // Add in all clickable locations
+  var temp = '';
+  for (var i = 0; i < 54; i++) {
+    if ([0, 3, 7, 11, 16, 21, 27, 33, 38, 43, 47, 51].includes(i)) {
+      temp += "</div><div class='chunk'>";
+    }
+    temp += "<span>" + i + "</span>";
+  }
+  temp = temp.substring(6) + '</div>';
+  str += temp + "</div></div>";
   document.body.innerHTML = str;
 }

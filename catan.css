@@ -2,10 +2,52 @@ body {
 	padding-top: 120px;
 }
 
+#board {
+	position: relative;
+}
+
+#spots {
+  position: absolute;
+  top: -72px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.chunk {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.chunk:nth-of-type(1)  { width: 321px; }
+.chunk:nth-of-type(2)  { width: 464px; }
+.chunk:nth-of-type(3)  { width: 464px; }
+.chunk:nth-of-type(4)  { width: 606px; }
+.chunk:nth-of-type(5)  { width: 606px; }
+.chunk:nth-of-type(6)  { width: 763px; }
+.chunk:nth-of-type(7)  { width: 763px; }
+.chunk:nth-of-type(8)  { width: 606px; }
+.chunk:nth-of-type(9)  { width: 606px; }
+.chunk:nth-of-type(10) { width: 464px; }
+.chunk:nth-of-type(11) { width: 464px; }
+.chunk:nth-of-type(12) { width: 321px; }
+
+.chunk:nth-of-type(2n) { padding-top: 16px; }
+.chunk:nth-of-type(2n + 1) { padding-top: 71px; }
+
+.chunk span {
+	width: 20px;
+	height: 20px;
+	background-color: white;
+	border-radius: 10px;
+	text-align: center;
+	opacity: 0.4;
+}
+
 .background {
 	width: 994px;
   position: absolute;
-  top: -5px;
+  top: -90px;
   left: 50%;
   transform: translate(-50%, 0%);
   z-index: -1;

@@ -55,7 +55,7 @@ class Tile {
     this.number = number;
   }
 
-  binary () {
+  binary() {
     var typeString = types.indexOf(this.type).toString(2);
     var numString = this.number.toString(2);
     return ("000" + typeString).substring(typeString.length) + ("0000" + numString).substring(numString.length);
