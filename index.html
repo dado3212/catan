@@ -77,6 +77,9 @@
                 // Set it to whatever spot it is now
                 this.classList.remove('open');
                 this.classList.add(moveColors[index].toLowerCase());
+                if (index < 4) {
+                  this.classList.add('first');
+                }
 
                 // Add it to the list
                 game.locs.push(parseInt(this.dataset.num));

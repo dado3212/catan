@@ -60,7 +60,8 @@ function displayGame(game) {
       temp += "</div><div class='chunk'>";
     }
     if (game.locs.includes(i)) {
-      temp += "<span data-num='" + i + "' class='" + moves[game.locs.indexOf(i)].toLowerCase() + "'></span>";
+      var pos = game.locs.indexOf(i);
+      temp += "<span data-num='" + i + "' class='" + moves[pos].toLowerCase() + (pos < 4 ? " first" : "") + "'></span>";
     } else {
       temp += "<span data-num='" + i + "' class='open'></span>";
     }
