@@ -7,13 +7,44 @@
     <script src="js/main.js"></script>
     <script>
       window.onload = function() {
-        if (window.location.search.startsWith("?game=") && window.location.search.slice(1).indexOf("&") == -1) {
-          var game = decode(window.location.search.slice(6));
+        var search = window.location.search;
+        if (search.startsWith("?game=")) {
+          var index = search.indexOf("&");
+          if (index != -1) {
+            var game = decode(search.slice(6, index));
+          } else {
+            var game = decode(search.slice(6));
+          }
         } else {
           var game = newGame();
         }
         console.log(encode(game));
         displayGame(game);
+
+        var moveColors = ['red', 'blue', 'yellow', 'white', 'white', 'yellow', 'blue', 'red'];
+        var index = 0;
+
+        var spots = document.querySelectorAll('.chunk span');
+
+        for (var i = 0; i < spots.length; i++) {
+          spots[i].addEventListener('click', function(event) {
+            if (index < moveColors.length) {
+              if (this.classList.contains('open')) {
+                // Set it to whatever spot it is now
+                this.classList.remove('open');
+                this.classList.add(moveColors[index]);
+
+                index += 1;
+              }
+
+              if (index == moveColors.length) {
+                for (var i = 0; i < spots.length; i++) {
+                  spots[i].classList.remove('open');
+                }
+              }
+            }
+          });
+        }
       };
     </script>
   </head>

@@ -38,10 +38,36 @@ body {
 .chunk span {
 	width: 20px;
 	height: 20px;
-	background-color: white;
 	border-radius: 10px;
 	text-align: center;
 	opacity: 0.4;
+}
+
+.chunk span.red, 
+.chunk span.blue, 
+.chunk span.yellow, 
+.chunk span.white {
+	opacity: 1;
+	border-radius: 1px;
+	height: 30px;
+
+	margin-top: -10px;
+}
+
+.chunk span.red { background-color: red; }
+.chunk span.blue { background-color: blue; }
+.chunk span.yellow { background-color: yellow; }
+.chunk span.white { background-color: white; }
+
+.chunk span.open {
+	background-color: white;
+	animation: open-animation 3s infinite;
+}
+
+@keyframes open-animation {
+  0%   { opacity: 0; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0; }
 }
 
 /* Adding in Ships */

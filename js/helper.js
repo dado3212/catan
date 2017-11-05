@@ -37,7 +37,7 @@ function encode64(binary) {
 function decode64(base64) {
   var convert = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
   var binary = "";
-  // Pad it
+
   for (var i = 0; i < base64.length; i++) {
     var converted = convert.indexOf(base64[i]).toString(2);
     binary += ("000000" + converted).substring(converted.length)
@@ -46,7 +46,8 @@ function decode64(base64) {
 }
 
 // Board constants
-var types = ["desert", "brick", "lumber", "ore", "sheep", "wheat"];
+var tileTypes = ["desert", "brick", "lumber", "ore", "sheep", "wheat"];
+var shipTypes = ["31", "wheat", "ore", "lumber", "brick", "sheep"];
 
 // Board stuff
 class Tile {
@@ -56,7 +57,7 @@ class Tile {
   }
 
   binary() {
-    var typeString = types.indexOf(this.type).toString(2);
+    var typeString = tileTypes.indexOf(this.type).toString(2);
     var numString = this.number.toString(2);
     return ("000" + typeString).substring(typeString.length) + ("0000" + numString).substring(numString.length);
   }
@@ -65,6 +66,11 @@ class Tile {
 class Ship {
   constructor(type) {
     this.type = type;
+  }
+
+  binary() {
+    var typeString = shipTypes.indexOf(this.type).toString(2);
+    return ("000" + typeString).substring(typeString.length);
   }
 }
 
@@ -77,28 +83,38 @@ class Game {
 
 // Encodes a game into a base64 string
 function encode(game) {
-  if (game.pieces.length == 19) {
-    var binary = "";
+  var binary = "";
+  if (game.pieces.length == 19 && game.ships.length == 9) {
     for (var i = 0; i < game.pieces.length; i++) {
       binary += game.pieces[i].binary();
     }
+    for (var i = 0; i < game.ships.length; i++) {
+      binary += game.ships[i].binary();
+    }
   }
+  
   return encode64(binary);
 }
 
 // Decodes a base64 string into a game
 function decode(string) {
   var binary = decode64(string);
-  binary = binary.substring(binary.length - 19 * 7);
+  binary = binary.substring(binary.length - (19 * 7 + 3 * 9));
 
-  var pieces = []
-  if (binary.length == 19 * 7) {
+  var pieces = [];
+  var ships = [];
+  if (binary.length == 19 * 7 + 3 * 9) {
     for (var i = 0; i < 19; i++) {
       var slice = binary.substr(i*7, 7);
-      var type = types[parseInt(slice.slice(0, 3), 2)];
+      var type = tileTypes[parseInt(slice.slice(0, 3), 2)];
       var num = parseInt(slice.slice(3, 7), 2);
       pieces.push(new Tile(type, num));
     }
+    for (var i = 0; i < 9; i++) {
+      var slice = binary.substr(19*7 + i*3, 3);
+      var type = shipTypes[parseInt(slice, 2)];
+      ships.push(new Ship(type));
+    }
   }
-  return new Game(pieces);
+  return new Game(pieces, ships);
 }

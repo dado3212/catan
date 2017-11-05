@@ -19,7 +19,7 @@ function newGame() {
 
   var theseShips = [];
   for (var i = 0; i < ships.length; i++) {
-    theseShips.push(new Tile(ships[i]));
+    theseShips.push(new Ship(ships[i]));
   }
 
   return new Game(pieces, theseShips);
@@ -54,7 +54,7 @@ function displayGame(game) {
     if ([0, 3, 7, 11, 16, 21, 27, 33, 38, 43, 47, 51].includes(i)) {
       temp += "</div><div class='chunk'>";
     }
-    temp += "<span>" + i + "</span>";
+    temp += "<span data-num='" + i + "' class='open'></span>";
   }
   temp = temp.substring(6) + '</div>';
   str += temp + "</div></div>";
