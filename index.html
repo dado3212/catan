@@ -37,6 +37,7 @@
         var search = window.location.search;
 
         var game;
+        var type = 'spiral';
 
         if (search.startsWith("?")) {
           search = search.slice(1).split("&");
@@ -53,10 +54,19 @@
           if (searchQuery['moves']) {
             game.locs = decodeMoves(searchQuery['moves']);
           }
+          if (searchQuery['gameType']) {
+            type = searchQuery['gameType'];
+          }
         }
 
         if (!game) {
-          game = newPseudoRandomGame();
+          if (type == 'random') {
+            game = newRandomGame();
+          } else if (type == 'pseudorandom') {
+            game = newPseudoRandomGame();
+          } else {
+            game = newSpiralGame();
+          }
         }
 
         var gameCode = encode(game);

@@ -33,6 +33,11 @@ Array.prototype.popRandom = function () {
   return this.splice(Math.floor(Math.random() * this.length), 1);
 }
 
+/*
+  Generates a game with randomized tiles, but the alphabetical counter-clockwise
+  placement technique.  This number order is the same every time, but the tiles
+  underneath switch.
+ */
 function newSpiralGame() {
   var board = shuffle(allPieces);
   var probs = shuffle(allProbs);
@@ -60,6 +65,10 @@ function newSpiralGame() {
   return new Game(pieces, theseShips);
 }
 
+/*
+  Generates a game with randomized tiles, and randomized numbers, but requires
+  that no two red tiles are touching using the adjacent mapping dictionary.
+ */
 function newPseudoRandomGame() {
   var board = shuffle(allPieces);
   var probs = shuffle(allProbs).filter(function(e) { 
@@ -103,6 +112,9 @@ function newPseudoRandomGame() {
   return new Game(pieces, theseShips);
 }
 
+/*
+  Generates a completely random board.  Anything goes.
+ */
 function newRandomGame() {
   var board = shuffle(allPieces);
   var probs = shuffle(allProbs);
@@ -169,7 +181,15 @@ function displayGame(game) {
   str += temp + "</div></div>";
 
   // Add in the helper side view
-  str += "<div id='sidebar'><h3>Share</h3><a id='gameid'>Link to Board</a><br><a id='moveid'>Link to Board w/ Moves</a><p></p><h4 id='placement'>Red is placing</h4><a id='undo' href='#'>Undo</a><br><br><a href='?'>Generate New Board</a></div>";
+  str += "<div id='sidebar'>" + 
+    "<h3>Share</h3>" + 
+    "<a id='gameid'>Link to Board</a><br>" + 
+    "<a id='moveid'>Link to Board w/ Moves</a>" + 
+    "<h4 id='placement'>Red is placing</h4>" + 
+    "<a id='undo' href='#'>Undo</a><br><br>" + 
+    "<a href='?gameType=spiral'>Generate New Board</a><br>" + 
+    "<a href='?gameType=pseudorandom'>Generate Pseudorandom Board</a><br>" + 
+    "<a href='?gameType=random'>Generate Completely Random Board</a></div>";
 
   document.body.innerHTML = str;
 }
