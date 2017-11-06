@@ -4,8 +4,106 @@ var allProbs = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12];
 var allShips = ["31", "31", "31", "31", "wheat", "ore", "lumber", "brick", "sheep"];
 
 var moves = ['Red', 'Blue', 'Yellow', 'White', 'White', 'Yellow', 'Blue', 'Red'];
+var altMoves = [5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11];
+var altOrder = [0, 3, 7, 12, 16, 17, 18, 15, 11, 6, 2, 1, 4, 8, 13, 14, 10, 5, 9];
 
-function newGame() {
+var adjacent = {
+  0: [1, 3, 4],
+  1: [0, 2, 4, 5],
+  2: [1, 5, 6],
+  3: [0, 4, 7, 8],
+  4: [0, 1, 3, 5, 8, 9],
+  5: [1, 2, 4, 6, 9, 10],
+  6: [2, 5, 10, 11],
+  7: [3, 8, 12],
+  8: [3, 4, 7, 9, 12, 13],
+  9: [4, 5, 8, 10, 13, 14],
+  10: [5, 6, 9, 11, 14, 15],
+  11: [6, 10, 15],
+  12: [7, 8, 13, 16],
+  13: [8, 9, 12, 14, 16, 17],
+  14: [9, 10, 13, 15, 17, 18],
+  15: [10, 11, 14, 18],
+  16: [12, 13, 17],
+  17: [13, 14, 16, 18],
+  18: [14, 15, 17],
+};
+
+Array.prototype.popRandom = function () {
+  return this.splice(Math.floor(Math.random() * this.length), 1);
+}
+
+function newSpiralGame() {
+  var board = shuffle(allPieces);
+  var probs = shuffle(allProbs);
+  var ships = shuffle(allShips);
+
+  var pieces = [];
+  for (var i = 0; i < board.length; i++) {
+    pieces.push(new Tile(board[i], 7));
+  }
+
+  // Add in the numbers
+  var altIndex = 0;
+  for (var i = 0; i < altOrder.length; i++) {
+    if (pieces[altOrder[i]].type != "desert") {
+      pieces[altOrder[i]].number = altMoves[altIndex];
+      altIndex += 1;
+    }
+  }
+
+  var theseShips = [];
+  for (var i = 0; i < ships.length; i++) {
+    theseShips.push(new Ship(ships[i]));
+  }
+
+  return new Game(pieces, theseShips);
+}
+
+function newPseudoRandomGame() {
+  var board = shuffle(allPieces);
+  var probs = shuffle(allProbs).filter(function(e) { 
+      return e !== 6 && e != 8;
+  });
+  var ships = shuffle(allShips);
+
+  var possibilities = [];
+
+  // Put in all of the tiles
+  var pieces = [];
+  for (var i = 0; i < board.length; i++) {
+    pieces.push(new Tile(board[i], 7));
+    if (board[i] != "desert") {
+      possibilities.push(i);
+    }
+  }
+
+  // Place the 6's and 8's
+  var toPlace = [6, 6, 8, 8];
+  for (var i = 0; i < toPlace.length; i++) {
+    var pos = possibilities.popRandom();
+    pieces[pos].number = toPlace[i];
+    possibilities = possibilities.filter(function(e) {
+      return !adjacent[pos].includes(e);
+    });
+  }
+
+  // Place the rest of them
+  for (var i = 0; i < board.length; i++) {
+    if (board[i] != "desert" && pieces[i].number == 7) {
+      pieces[i].number = probs.pop();
+    }
+  }
+
+  var theseShips = [];
+  for (var i = 0; i < ships.length; i++) {
+    theseShips.push(new Ship(ships[i]));
+  }
+
+  return new Game(pieces, theseShips);
+}
+
+function newRandomGame() {
   var board = shuffle(allPieces);
   var probs = shuffle(allProbs);
   var ships = shuffle(allShips);
